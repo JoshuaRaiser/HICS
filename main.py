@@ -10,6 +10,8 @@ from mathematics.calculator import Calculator
 # list of coordinates of the nucleons for each ion
 positions_xy_right_ion = []
 positions_xy_left_ion = []
+
+# collision's impact parameter
 impact_param = 0
 
 def main():
@@ -40,7 +42,7 @@ def main():
 
 def initialize_nucleon_list(ion, direction):
     xy_list = []
-    for index in range(ion.atomMass):
+    for index in range(ion.atom_mass):
         cal = Calculator()
         little_r = cal.calculate_nuclear_density(ion, impact_param)[0]
         theta_angle = random.uniform(0, 2 * math.pi)

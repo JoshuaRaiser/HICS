@@ -6,6 +6,7 @@ from objects.ion import Ion
 
 class Calculator:
 
+    # these global variables are used to setup the direction from which the ions originates
     DIRECTION_RIGHT = 1
     DIRECTION_LEFT = 0
 
@@ -76,6 +77,3 @@ class Calculator:
         ion = self.actual_ion
         next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - self.F
         return next_x
-
-    def define_impact_param(self, b):
-        self.impact_param = b

@@ -8,7 +8,7 @@ class Ion:
         self.symbol = ""        # the symbol of ion in the periodic table
         self.a = 0.0            # skin depth
         self.R = 0.0            # nuclear radius
-        self.atomMass = 0       # atomic mass
+        self.atom_mass = 0      # atomic mass
 
     '''
     ' @Define
@@ -32,7 +32,7 @@ class Ion:
     ' entries -> value (integer)
     '''
     def define_atomic_mass(self, value):
-        self.atomMass = value
+        self.atom_mass = value
 
     '''
     ' @Define
