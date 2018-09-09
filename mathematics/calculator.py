@@ -4,10 +4,10 @@ import math
 from scipy.optimize import fsolve
 from objects.ion import Ion
 
-class Calculate:
+class Calculator:
 
-    RIGHT = 1
-    LEFT = 0
+    DIRECTION_RIGHT = 1
+    DIRECTION_LEFT = 0
 
     '''
     ' @Constructor
@@ -27,10 +27,9 @@ class Calculate:
     ' entries -> Ion type(objects/ion.py)
     ' exit -> nuclear density (float)
     '''
-    def calculate_nuclear_density(self, ion):
+    def calculate_nuclear_density(self, ion, b):
         self.actual_ion = ion
-        # Todo: don't use the ion radius to be impact parameter
-        self.impact_param = 0.5 #self.actual_ion.R
+        self.impact_param = b
         return fsolve(self.__calculate_find_root_integrated, 0.0)
 
     '''
@@ -40,9 +39,9 @@ class Calculate:
     ' exit -> x (float)
     '''
     def calculate_x(self, nd, theta_angle, direction):
-        if direction == Calculate.RIGHT:
+        if direction == Calculator.DIRECTION_RIGHT:
             return ((nd * math.cos(theta_angle))) + self.impact_param / 2
-        elif direction == Calculate.LEFT:
+        elif direction == Calculator.DIRECTION_LEFT:
             return ((nd * math.cos(theta_angle))) - self.impact_param / 2
         else:
             raise ValueError("The value of direction must be 1 for RIGHT or 0 for LEFT. (calculator.py>calculate_x)")
@@ -77,3 +76,6 @@ class Calculate:
         ion = self.actual_ion
         next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - self.F
         return next_x
+
+    def define_impact_param(self, b):
+        self.impact_param = b
