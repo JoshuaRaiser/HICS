@@ -18,25 +18,29 @@ def main():
     # define global vars to use in this scope
     global positions_xy_left_ion, positions_xy_right_ion, impact_param
     # Todo: this parameter must be choose by user
-    impact_param = 5
+    impact_param = 12.72
 
     # the right ion on collision
     right_ion = Ion()
-    right_ion.define_copper_ion()
+    right_ion.define_gold_ion()
 
     # the left ion on collision
     left_ion = Ion()
-    left_ion.define_copper_ion()
+    left_ion.define_gold_ion()
 
     # initialize lists of the ion's nucleons coordinates
     positions_xy_right_ion = initialize_nucleon_list(right_ion, 0)
     positions_xy_left_ion = initialize_nucleon_list(left_ion, 1)
 
+    # test for electric field
+    cal = Calculator()
+    cal.calculate_electric_field(positions_xy_right_ion)
+
     # draw graph of coordinates lists
     ion_radius = right_ion.R
     create_ion_graphs(positions_xy_left_ion, positions_xy_right_ion, ion_radius)
 
-    # show the graph
+    # show the graph and set his title
     plt.title("Heavy Ion Collision Simulator (" + left_ion.symbol + " + " + right_ion.symbol + ")")
     plt.show()
 

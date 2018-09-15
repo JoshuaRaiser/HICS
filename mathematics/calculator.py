@@ -15,12 +15,18 @@ class Calculator:
     ' this is the constructor method for this class
     '''
     def __init__(self):
-        self.w = 0                          # the parameter w of the 3pF and 3pG models
-        self.po = 1                         # initial nuclear density
-        self.p = random.uniform(0, 1)       # final nuclear density, random number (0 < p < 1)
-        self.F = random.uniform(0, 1)       # a random number between 0 and 1 (0 < F < 1)
-        self.actual_ion = Ion()             # just the actual Ion type(objects/ion.py)
-        self.impact_param = 0.0             # parameter of the impact of the collision
+        self.w = 0                              # the parameter w of the 3pF and 3pG models
+        self.po = 1                             # initial nuclear density
+        self.p = random.uniform(0, 1)           # final nuclear density, random number (0 < p < 1)
+        self.F = random.uniform(0, 1)           # a random number between 0 and 1 (0 < F < 1)
+        self.actual_ion = Ion()                 # just the actual Ion type(objects/ion.py)
+        self.impact_param = 0.0                 # parameter of the impact of the collision
+
+        # constants to electromagnetic field
+        self.proton_radius = 0.84               # this value is fundamental to calculate the electric field (0.84 - 0.87)
+        self.a_em = 1/137.03599911              # constant of fine structure
+        self.va_2 = 1 - ((2*938.272046)/200)**2 # magnitude of velocity, determined by collision energy (RHIC = 200 MeV)
+                                                # and the proton mass = 938.272046 MeV
 
     '''
     ' @Calculate
@@ -77,3 +83,33 @@ class Calculator:
         ion = self.actual_ion
         next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - self.F
         return next_x
+
+    '''
+    ' @Calculate
+    ' this function calculate the Electric Field of the collision (E)
+    ' entries -> xy[[x, y]] (float)
+    ' exit -> xy[x, y] (float), coordinates X and Y of one point to graph of Electric Field (E)
+    '''
+    def calculate_electric_field(self, xy_list):
+        electric_field_x_list = []
+        electric_field_y_list = []
+
+        for xy in range(len(xy_list)):
+            # to avoid division by zero, proceed only if X and Y are greater equal to proton radius
+            x = -xy_list[xy][0]
+            y = -xy_list[xy][1]
+            print(str(xy_list[xy][0]) + " " + str(xy_list[xy][1]))
+            print(str(x) + " " + str(y))
+            if x >= self.proton_radius and y >= self.proton_radius:
+                ra_module = math.sqrt(x**2 + y**2)
+                e_x = self.__calculate_electric_field_equation(x, ra_module)
+                e_y = self.__calculate_electric_field_equation(y, ra_module)
+                electric_field_x_list.append(e_x)
+                electric_field_y_list.append(e_y)
+
+        print(electric_field_x_list)
+
+    def __calculate_electric_field_equation(self, ra_vector_value, ra_module):
+        dividend = ((1 - self.va_2) * ra_vector_value)
+        divider = (ra_module**3) * ((1 - (ra_vector_value * math.sqrt(self.va_2))**2)/(ra_module**2))**(3/2)
+        return dividend / divider
