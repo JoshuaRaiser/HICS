@@ -8,7 +8,7 @@ class Ion:
         self.symbol = ""        # the symbol of ion in the periodic table
         self.a = 0.0            # skin depth
         self.R = 0.0            # nuclear radius
-        self.atom_mass = 0      # atomic mass
+        self.atom_num = 0      # atomic mass
 
     '''
     ' @Define
@@ -31,8 +31,8 @@ class Ion:
     ' this function define the atomMass value
     ' entries -> value (integer)
     '''
-    def define_atomic_mass(self, value):
-        self.atom_mass = value
+    def define_atom_num(self, value):
+        self.atom_num = value
 
     '''
     ' @Define
@@ -50,7 +50,7 @@ class Ion:
         self.define_symbol("Au 197")
         self.define_a(0.535)
         self.define_r(6.38)
-        self.define_atomic_mass(197)
+        self.define_atom_num(79)
 
     '''
     ' @Define
@@ -60,4 +60,4 @@ class Ion:
         self.define_symbol("Cu 63")
         self.define_a(0.5977)
         self.define_r(4.20641)
-        self.define_atomic_mass(63)
+        self.define_atom_num(63)

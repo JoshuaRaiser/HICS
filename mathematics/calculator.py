@@ -37,7 +37,10 @@ class Calculator:
     def calculate_nuclear_density(self, ion, b):
         self.actual_ion = ion
         self.impact_param = b
-        return fsolve(self.__calculate_find_root_integrated, 0.0)
+        # return fsolve(self.__calculate_find_root_integrated, 0.0)
+        r = random.uniform(0, ion.R)
+        print(r)
+        return r
 
     '''
     ' @Calculate
@@ -67,8 +70,8 @@ class Calculator:
             x_electric_field += math.fabs(electric_field_x_list[index])
             y_electric_field += math.fabs(electric_field_y_list[index])
 
-        x_electric_field = self.a_em * x_electric_field
-        y_electric_field = self.a_em * y_electric_field
+        x_electric_field = self.a_em * x_electric_field * (197**3)
+        y_electric_field = self.a_em * y_electric_field * (197**3)
         return [x_electric_field, y_electric_field]
 
     '''
@@ -82,14 +85,14 @@ class Calculator:
         magnetic_field_y_list = []
 
         for xy in range(len(xy_list)):
-            x = -xy_list[xy][0]
-            y = -xy_list[xy][1]
+            x = xy_list[xy][0]
+            y = xy_list[xy][1]
 
             # to avoid division by zero, proceed only if X and Y are greater equal to proton radius
             if math.fabs(x) >= self.proton_radius and math.fabs(y) >= self.proton_radius:
                 ra_module = math.sqrt(x ** 2 + y ** 2)
                 b_x = self.__calculate_magnetic_field_equation(xy_list[xy][1] * math.sqrt(self.va_2), ra_module)
-                b_y = self.__calculate_magnetic_field_equation(xy_list[xy][0] * math.sqrt(self.va_2), ra_module)
+                b_y = self.__calculate_magnetic_field_equation(-xy_list[xy][0] * math.sqrt(self.va_2), ra_module)
                 magnetic_field_x_list.append(b_x)
                 magnetic_field_y_list.append(b_y)
 
@@ -99,8 +102,8 @@ class Calculator:
             x_magnetic_field += math.fabs(magnetic_field_x_list[index])
             y_magnetic_field += math.fabs(magnetic_field_y_list[index])
 
-        x_magnetic_field = self.a_em * x_magnetic_field
-        y_magnetic_field = self.a_em * y_magnetic_field
+        x_magnetic_field = self.a_em * x_magnetic_field * (197**3)
+        y_magnetic_field = self.a_em * y_magnetic_field * (197**3)
         return [x_magnetic_field, y_magnetic_field]
 
     '''
@@ -146,7 +149,9 @@ class Calculator:
         # Todo: develop and integrate an equation to do a method when w is not 0
         ion = self.actual_ion
         next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - self.F
-        return next_x
+        r = random.uniform(0, ion.R)
+        print(r)
+        return r
 
     '''
     ' @Calculate
@@ -167,11 +172,11 @@ class Calculator:
     '''
     def __calculate_electric_field_equation(self, ra_vector_value, ra_module):
         dividend = (1 - self.va_2) * ra_vector_value
-        divider = (ra_module**3) * ((1 - (ra_module * math.sqrt(self.va_2))**2) / (ra_module**2))**(3 / 2)
+        divider = (ra_module**3) # * ((1 - (ra_module * math.sqrt(self.va_2))**2) / (ra_module**2))
         return dividend / divider
 
     # Todo: do a comment to introduce at this method
     def __calculate_magnetic_field_equation(self, va_x_ra, ra_module):
         dividend = (1 - self.va_2) * va_x_ra
-        divider = (ra_module**3) * math.fabs((1 - (va_x_ra**2)) / (ra_module**2))**(3 / 2)
+        divider = (ra_module**3) # * math.fabs((1 - (va_x_ra**2)) / (ra_module**2))
         return dividend / divider

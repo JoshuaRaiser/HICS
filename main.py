@@ -6,6 +6,9 @@ import math
 from objects.ion import Ion
 from mathematics.calculator import Calculator
 
+# grid to draw graphs
+grid = plt.GridSpec(2, 2, wspace=0.4, hspace=0.3)
+
 # impact parameter
 impact_param = 0
 
@@ -86,11 +89,22 @@ def initialize_nucleon_list(ion, direction):
 
     for index in range(ion.atom_mass):
         cal = Calculator()
-        little_r = cal.calculate_nuclear_density(ion, impact_param)[0]
+        little_r = random.uniform(0, ion.R) #cal.calculate_nuclear_density(ion, impact_param)[0]
         theta_angle = random.uniform(0, 2 * math.pi)
         pos_x = cal.calculate_x(little_r, theta_angle, direction)
         pos_y = cal.calculate_y(little_r, theta_angle)
+
+        if direction == Calculator.DIRECTION_LEFT:
+            pos_x -= impact_param/2
+
+        elif direction == Calculator.DIRECTION_RIGHT:
+            pos_x += impact_param/2
+
+        else:
+            raise ValueError("The value of direction must be 1 for RIGHT or 0 for LEFT. (calculator.py>calculate_x)")
+
         xy_list.append([pos_x, pos_y])
+        #print('r: '+str(little_r)+' x: '+str(pos_x)+' y: '+str(pos_y))
 
     return xy_list
 
@@ -100,15 +114,17 @@ def create_ion_graphs(left, right, ion_radius):
 
     # draw the nucleons
     for index in range(len(left)):
-        plt.scatter(left[index][0], left[index][1], s=80, facecolors='none', edgecolors='b')
+        # plt.scatter(left[index][0], left[index][1], s=80, facecolors='none', edgecolors='b')
+        plt.plot(left[index][0], left[index][1], 'ob')
 
     for index in range(len(right)):
-        plt.scatter(right[index][0], right[index][1], s=80, facecolors='none', edgecolors='r')
+        # plt.scatter(right[index][0], right[index][1], s=80, facecolors='none', edgecolors='r')
+        plt.plot(right[index][0], right[index][1], 'or')
 
     # draw the circles to represent the Ions
     ax = plt.gca()
-    ax.add_patch(plt.Circle((impact_param/2, 0), radius=ion_radius, facecolor='none', edgecolor='b'))
-    ax.add_patch(plt.Circle((-impact_param/2, 0), radius=ion_radius, facecolor='none', edgecolor='r'))
+    ax.add_patch(plt.Circle((impact_param / 2, 0), radius=ion_radius, facecolor='none', edgecolor='b'))
+    ax.add_patch(plt.Circle((-impact_param / 2, 0), radius=ion_radius, facecolor='none', edgecolor='r'))
     plt.axis('equal')
 
 def create_electric_field_graph(electric_field_point_list):
