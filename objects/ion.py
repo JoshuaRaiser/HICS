@@ -47,7 +47,7 @@ class Ion:
     ' this function load the Gold Ion configuration
     '''
     def define_gold_ion(self):
-        self.define_symbol("Au 197")
+        self.define_symbol("Au (atomic mass=197, atomic number=79)")
         self.define_a(0.535)
         self.define_r(6.38)
         self.define_atom_num(79)
@@ -57,7 +57,7 @@ class Ion:
     ' this function load the Copper Ion configuration
     '''
     def define_copper_ion(self):
-        self.define_symbol("Cu 63")
+        self.define_symbol("Cu (atomic mass=63, atomic number=29)")
         self.define_a(0.5977)
         self.define_r(4.20641)
-        self.define_atom_num(63)
+        self.define_atom_num(29)

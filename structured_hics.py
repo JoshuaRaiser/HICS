@@ -1,8 +1,10 @@
 # imports
 import math
 import random
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
 
-# imports from
+# from archive dot py imports
 from objects.ion import Ion
 
 # error messages
@@ -12,18 +14,33 @@ ERROR_INVALID_DIRECTION_MESSAGE = 'Invalid direction error.'
 RIGHT = 0
 LEFT = 1
 
+# non constants global vars
+impact_parameter = 0
+impact_parameter_list = []
+
 # constants vars
 a_em = 1/137
 proton_radius = 0.84    # 0.84 - 0.87
-# Todo: 200 or 200000? Fabs to avoid negative number root square? Ask to Marcelo.
-vn = math.sqrt(math.fabs(1 - (2*938.272046)/math.sqrt(200)))
+vn = math.sqrt(1 - ((2*938.272046)/200000)**2)
+
+# create 2x2 sub plots
+gd = gridspec.GridSpec(2, 2, wspace=0.4, hspace=0.3)
+plt.figure()
 
 def main():
+    global impact_parameter, impact_parameter_list
+
+    # ions in collision
+    ion = Ion()
+    ion.define_gold_ion()
 
     # vars list
-    impact_parameter = 0.0
     impact_parameter_limit = 12
     for_count = 100
+
+    # ion's nucleons coordinates list
+    nucleons_positions_xy_right_ion = []
+    nucleons_positions_xy_left_ion = []
 
     # electromagnetic field event results
     eEx_event = []
@@ -32,33 +49,50 @@ def main():
     eBy_event = []
 
     while impact_parameter <= impact_parameter_limit:
+        eEx_right_sum, eEy_right_sum = 0, 0
+        eEx_left_sum, eEy_left_sum = 0, 0
+        eBx_right_sum, eBy_right_sum = 0, 0
+        eBx_left_sum, eBy_left_sum = 0, 0
 
         for index in range(for_count):
-            # ions in collision
-            ion = Ion()
-            ion.define_gold_ion()
 
-            nucleons_positions_xy_right_ion = initialize_nucleons_list(ion, RIGHT, impact_parameter)
-            nucleons_positions_xy_left_ion = initialize_nucleons_list(ion, LEFT, impact_parameter)
+            nucleons_positions_xy_right_ion = initialize_nucleons_list(ion, RIGHT)
+            nucleons_positions_xy_left_ion = initialize_nucleons_list(ion, LEFT)
 
             # calculate the electric field
             eExy_right = electric_field(nucleons_positions_xy_right_ion)
+            eEx_right_sum += math.fabs(eExy_right[0])
+            eEy_right_sum += math.fabs(eExy_right[1])
+
             eExy_left = electric_field(nucleons_positions_xy_left_ion)
+            eEx_left_sum += math.fabs(eExy_left[0])
+            eEy_left_sum += math.fabs(eExy_left[1])
 
             # calculate the magnetic field
             eBxy_right = magnetic_field(nucleons_positions_xy_right_ion, RIGHT)
-            eBxy_left = magnetic_field(nucleons_positions_xy_right_ion, RIGHT)
+            eBx_right_sum += math.fabs(eBxy_right[0])
+            eBy_right_sum += math.fabs(eBxy_right[1])
 
-            # calculate the events and add to the respective event list
-            eEx_event.append(eExy_right[0] + eExy_left[0])
-            eEy_event.append(eExy_right[1] + eExy_left[1])
-            eBx_event.append(eBxy_right[0] + eBxy_left[0])
-            eBy_event.append(eBxy_right[1] + eBxy_left[1])
+            eBxy_left = magnetic_field(nucleons_positions_xy_right_ion, LEFT)
+            eBx_left_sum += math.fabs(eBxy_left[0])
+            eBy_left_sum += math.fabs(eBxy_left[1])
 
+        # calculate the events and add to the respective event list
+        eEx_event.append(eEx_right_sum/for_count + eEx_left_sum/for_count)
+        eEy_event.append(eEy_right_sum/for_count + eEy_left_sum/for_count)
+        eBx_event.append(eBx_right_sum/for_count + eBy_left_sum/for_count)
+        eBy_event.append(eBx_right_sum/for_count + eBy_left_sum/for_count)
+
+        impact_parameter_list.append(impact_parameter)
         impact_parameter += 2
 
+    # plot graphs
+    create_ion_graph(nucleons_positions_xy_right_ion, nucleons_positions_xy_left_ion, ion)
+    create_magnetic_field_graph(eBx_event, eBy_event)
+    create_electric_field_graph(eEx_event, eEy_event)
+    plt.show()
 
-def initialize_nucleons_list(ion, direction, impact_param):
+def initialize_nucleons_list(ion, direction):
     xy_nucleons_list = []
     pos_x = 0
     pos_y = 0
@@ -68,10 +102,10 @@ def initialize_nucleons_list(ion, direction, impact_param):
         theta_angle = random.uniform(0, 2*math.pi)
 
         if direction == RIGHT:
-            pos_x = r * math.cos(theta_angle) + impact_param/2
+            pos_x = r * math.cos(theta_angle) + impact_parameter/2
 
         elif direction == LEFT:
-            pos_x = r * math.cos(theta_angle) - impact_param/2
+            pos_x = r * math.cos(theta_angle) - impact_parameter/2
 
         else:
             raise ValueError(ERROR_INVALID_DIRECTION_MESSAGE)
@@ -84,10 +118,11 @@ def initialize_nucleons_list(ion, direction, impact_param):
 def electric_field(nucleon_list):
     e_x, e_y = 0, 0
     sum_x, sum_y = 0, 0
-    for index in range(len(nucleon_list)):
-        x = nucleon_list[index][0], y = nucleon_list[index][1]
 
-        # Todo: really need do this verification yet? Ask to Marcelo.
+    for index in range(len(nucleon_list)):
+        x = nucleon_list[index][0]
+        y = nucleon_list[index][1]
+
         if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
             rn = math.sqrt(x ** 2 + y ** 2)
             sum_x += -x / (rn ** 3)
@@ -98,38 +133,76 @@ def electric_field(nucleon_list):
     return [e_x, e_y]
 
 def magnetic_field(nucleon_list, direction):
-    e_x, e_y = 0, 0
     sum_x, sum_y = 0, 0
-    if direction == RIGHT:
-        for index in range(len(nucleon_list)):
-            x = nucleon_list[index][0], y = nucleon_list[index][1]
 
-            # Todo: really need do this verification yet? Ask to Marcelo.
-            if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
-                rn = math.sqrt(x ** 2 + y ** 2)
+    for index in range(len(nucleon_list)):
+        x = nucleon_list[index][0]
+        y = nucleon_list[index][1]
+
+        if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
+            rn = math.sqrt(x ** 2 + y ** 2)
+
+            if direction == RIGHT:
                 sum_x += -x / (rn ** 3)
                 sum_y += y / (rn ** 3)
 
-        e_x = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_x
-        e_y = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_y
-        return [e_x, e_y]
-
-    elif direction == LEFT:
-        for index in range(len(nucleon_list)):
-            x = nucleon_list[index][0], y = nucleon_list[index][1]
-
-            # Todo: really need do this verification yet? Ask to Marcelo.
-            if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
-                rn = math.sqrt(x ** 2 + y ** 2)
+            elif direction == LEFT:
                 sum_x += x / (rn ** 3)
                 sum_y += -y / (rn ** 3)
 
-        e_x = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_x
-        e_y = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_y
-        return [e_x, e_y]
+            else:
+                raise ValueError(ERROR_INVALID_DIRECTION_MESSAGE)
 
-    else:
-        raise ValueError(ERROR_INVALID_DIRECTION_MESSAGE)
+    e_x = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_x
+    e_y = (a_em * vn) / math.sqrt(1 - (vn ** 2)) * sum_y
+    return [e_x, e_y]
+
+def create_ion_graph(left, right, ion):
+    global gd
+    # row 0, span all columns
+    ax = plt.subplot(gd[0, :])
+    plt.axis('equal')
+    plt.title("Heavy Ion Collision Simulator  A+A (" + ion.symbol + ")")
+
+    # draw ion's nucleons
+    for index in range(ion.atom_num):
+        plt.scatter(right[index][0], right[index][1], s=100, facecolors='none', edgecolors='b')
+
+    for index in range(ion.atom_num):
+        plt.scatter(left[index][0], left[index][1], s=100, facecolors='none', edgecolors='r')
+
+    # draw ions
+    gca = plt.gca()
+    gca.add_patch(plt.Circle((-impact_parameter / 2, 0), radius=ion.R, facecolor='none', edgecolor='b'))
+    gca.add_patch(plt.Circle((impact_parameter / 2, 0), radius=ion.R, facecolor='none', edgecolor='r'))
+
+    # Turn off tick labels
+    ax.set_yticklabels([])
+    ax.set_xticklabels([])
+
+def create_magnetic_field_graph(magnetic_field_x_event, magnetic_field_y_event):
+    global gd
+    # row 1, column 0
+    plt.subplot(gd[1, 0])
+    plt.title("Magnetic Field (B)")
+    plt.xlabel("b (fm)")
+    plt.ylabel("e.B Field event")
+
+    plt.plot(impact_parameter_list, magnetic_field_x_event, 'bo-', label='|B(x)|')
+    plt.plot(impact_parameter_list, magnetic_field_y_event, 'r.-', label='|B(y)|')
+    plt.legend(loc='upper right', borderaxespad=0.1)
+
+def create_electric_field_graph(electric_field_x_event, electric_field_y_event):
+    global gd
+    # row 1, column 1
+    plt.subplot(gd[1, 1])
+    plt.title("Electric Eield (E)")
+    plt.xlabel("b (fm)")
+    plt.ylabel("e.E Field event")
+
+    plt.plot(impact_parameter_list, electric_field_x_event, 'bo-', label='|E(x)|')
+    plt.plot(impact_parameter_list, electric_field_y_event, 'r.-', label='|E(y)|')
+    plt.legend(loc='upper right', borderaxespad=0.1)
 
 if __name__ == "__main__":
     main()

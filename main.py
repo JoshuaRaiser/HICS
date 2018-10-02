@@ -87,7 +87,7 @@ def main():
 def initialize_nucleon_list(ion, direction):
     xy_list = []
 
-    for index in range(ion.atom_mass):
+    for index in range(ion.atom_num):
         cal = Calculator()
         little_r = random.uniform(0, ion.R) #cal.calculate_nuclear_density(ion, impact_param)[0]
         theta_angle = random.uniform(0, 2 * math.pi)
