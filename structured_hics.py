@@ -79,8 +79,6 @@ def main():
         eBy_event.append(eBy_sum/for_count)
         eBy_event_nomodule.append(eBy_sum_raw/for_count)
 
-        #print('Ex esquerda: ' + str(eEx_left_sum/for_count) + ' Ex direita: ' + str(eEx_right_sum/for_count))
-
         impact_parameter_list.append(impact_parameter)
         impact_parameter += 2
 
@@ -184,12 +182,13 @@ def create_magnetic_field_graph(magnetic_field_x_event, magnetic_field_y_event, 
     # row 1, column 0
     plt.subplot(gd[1, 0])
     plt.title("Magnetic Field (B)")
-    plt.xlabel("b (fm)")
+    plt.xlabel("$b (fm)$")
     plt.ylabel("e.B Field event")
 
     plt.plot(impact_parameter_list, magnetic_field_x_event, 'bo-', label='|B(x)|')
-    plt.plot(impact_parameter_list, magnetic_field_y_event, 'r.-', label='|B(y)|')
-    plt.plot(impact_parameter_list, magnetic_field_y_event_nomodule, 'k^-', label='B(y)')
+    plt.plot(impact_parameter_list, magnetic_field_y_event, 'rs-', label='|B(y)|')
+    plt.plot(impact_parameter_list, magnetic_field_y_event_nomodule, 'k.-', label='B(y)')
+
     plt.legend(loc='upper right', borderaxespad=0.1)
 
 def create_electric_field_graph(electric_field_x_event, electric_field_y_event):
@@ -197,7 +196,7 @@ def create_electric_field_graph(electric_field_x_event, electric_field_y_event):
     # row 1, column 1
     plt.subplot(gd[1, 1])
     plt.title("Electric Field (E)")
-    plt.xlabel("b (fm)")
+    plt.xlabel("$b (fm)$")
     plt.ylabel("e.E Field event")
 
     plt.plot(impact_parameter_list, electric_field_x_event, 'bo-', label='|E(x)|')
