@@ -50,16 +50,16 @@
     <session id="291112554">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.19" value="2" />
+          <entry key="project.open.time.19" value="3" />
           <entry key="project.open.time.20" value="1" />
-          <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.23" value="2" />
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -67,23 +67,27 @@
           <entry key="ElectricField" value="239" />
           <entry key="dummy" value="13" />
           <entry key="main" value="3" />
-          <entry key="py" value="17895" />
+          <entry key="md" value="599" />
+          <entry key="py" value="19633" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Markdown" value="599" />
           <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Python" value="18137" />
+          <entry key="Python" value="19875" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ElectricField" value="2" />
+          <entry key="md" value="1" />
           <entry key="py" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Markdown" value="1" />
           <entry key="Python" value="10" />
         </counts>
       </usages-collector>
@@ -94,8 +98,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/structured_hics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="91" column="25" lean-forward="true" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+            <state relative-caret-position="263">
+              <caret line="238" column="55" lean-forward="true" selection-start-line="238" selection-start-column="55" selection-end-line="238" selection-end-column="55" />
+              <folding>
+                <element signature="e#10#21#0" expanded="true" />
+                <element signature="e#2918#3611#0" />
+                <element signature="e#3658#3851#0" />
+                <element signature="e#3902#4418#0" />
+                <element signature="e#4469#5176#0" />
+                <element signature="e#5217#6064#0" />
+                <element signature="e#6736#7110#0" />
+                <marker date="1538787232339" expanded="true" signature="5795:5797" ph="..." />
+                <marker date="1538787232339" expanded="true" signature="7804:8242" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="425">
+                <caret line="25" column="43" lean-forward="true" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -103,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
+            <state relative-caret-position="1258">
               <caret line="147" column="52" selection-start-line="147" selection-start-column="52" selection-end-line="147" selection-end-column="52" />
               <folding>
                 <element signature="e#287#2935#0" />
@@ -116,8 +143,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mathematics/calculator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="40" column="36" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+            <state relative-caret-position="2431">
+              <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,8 +155,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/ion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+            <state relative-caret-position="1054">
+              <caret line="62" column="32" lean-forward="true" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -154,8 +184,9 @@
         <option value="$PROJECT_DIR$/mathematics/calculator.py" />
         <option value="$PROJECT_DIR$/structured algorithm/structured_hics.py" />
         <option value="$USER_HOME$/Desktop/teste.py" />
-        <option value="$PROJECT_DIR$/objects/ion.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/objects/ion.py" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/structured_hics.py" />
       </list>
     </option>
@@ -377,7 +408,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49776787" weight="0.31774193" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49479166" visible="true" weight="0.21129033" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49479166" visible="true" weight="0.18064517" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5052083" side_tool="true" weight="0.32419354" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49627978" weight="0.20600858" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -416,16 +447,9 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages/scipy/optimize/minpack.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/matplotlib/axes/_subplots.py" />
     <entry file="file://$USER_HOME$/Desktop/teste.py" />
-    <entry file="file://$PROJECT_DIR$/objects/ion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
+        <state relative-caret-position="1258">
           <caret line="147" column="52" selection-start-line="147" selection-start-column="52" selection-end-line="147" selection-end-column="52" />
           <folding>
             <element signature="e#287#2935#0" />
@@ -436,15 +460,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mathematics/calculator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="40" column="36" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+        <state relative-caret-position="2431">
+          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/ion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="32" lean-forward="true" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="425">
+            <caret line="25" column="43" lean-forward="true" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/structured_hics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="91" column="25" lean-forward="true" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+        <state relative-caret-position="263">
+          <caret line="238" column="55" lean-forward="true" selection-start-line="238" selection-start-column="55" selection-end-line="238" selection-end-column="55" />
+          <folding>
+            <element signature="e#10#21#0" expanded="true" />
+            <element signature="e#2918#3611#0" />
+            <element signature="e#3658#3851#0" />
+            <element signature="e#3902#4418#0" />
+            <element signature="e#4469#5176#0" />
+            <element signature="e#5217#6064#0" />
+            <element signature="e#6736#7110#0" />
+            <marker date="1538787232339" expanded="true" signature="5795:5797" ph="..." />
+            <marker date="1538787232339" expanded="true" signature="7804:8242" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
