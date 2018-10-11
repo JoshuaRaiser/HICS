@@ -8,7 +8,8 @@ class Ion:
         self.symbol = ""        # the symbol of ion in the periodic table
         self.a = 0.0            # skin depth
         self.R = 0.0            # nuclear radius
-        self.atom_num = 0      # atomic mass
+        self.atom_num = 0       # atomic mass
+        self.gev = 0            # energy at collision
 
     '''
     ' @Define
@@ -44,6 +45,14 @@ class Ion:
 
     '''
     ' @Define
+    ' this function define the energy used in the collision
+    ' entries -> value (float)
+    '''
+    def define_gev(self, value):
+        self.gev = value
+
+    '''
+    ' @Define
     ' this function load the Gold Ion configuration
     '''
     def define_gold_ion(self):
@@ -51,13 +60,15 @@ class Ion:
         self.define_a(0.535)
         self.define_r(6.38)
         self.define_atom_num(79)
+        self.define_gev(200)
 
     '''
     ' @Define
-    ' this function load the Copper Ion configuration
+    ' this function load the Lead Ion configuration
     '''
-    def define_copper_ion(self):
-        self.define_symbol("Cu (atomic mass=63, atomic number=29)")
-        self.define_a(0.5977)
-        self.define_r(4.20641)
-        self.define_atom_num(29)
+    def define_lead_ion(self):
+        self.define_symbol("Pb (atomic mass=206, atomic number=82)")
+        self.define_a(0.545)
+        self.define_r(6.61)
+        self.define_atom_num(82)
+        self.define_gev(2760)
