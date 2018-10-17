@@ -33,11 +33,11 @@ from objects.ion import Ion
 '                           * gold (Au, 197, 79)
 '                           * lead (Pb, 206, 82)
 '''
-                                            # Autor' considerations:
-config_for_count = 1000                     # 1000 is a good choice the simulations
-config_impact_parameter = 0                 # start in 0 to get a centralized collision
-config_impact_parameter_limit = 14          # 14 is a good choice tho
-config_impact_parameter_interval = 2        # 2 for the interval jump is good, never can't be 0!
+                                            # Autor's considerations:
+config_for_count = 1000                     # 1000 is a good choice
+config_impact_parameter = 0                 # start in 0 to get a full centralized collision at init of the collision
+config_impact_parameter_limit = 14          # 14 is a good choice
+config_impact_parameter_interval = 2        # 2 for the interval jump is good, can be 0 if the limit are 0 too!
 
 config_ion_type = Ion()
 config_ion_type.define_gold_ion()           # gold is nice to initial collisions simulations, later can try with others
