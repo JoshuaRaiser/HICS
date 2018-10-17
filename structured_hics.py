@@ -1,8 +1,8 @@
 # imports
 import math
 import random
-import statistics as stat
-import numpy as np
+import time
+import configurations_hics
 import matplotlib.pylab as plt
 import matplotlib.gridspec as gridspec
 
@@ -18,11 +18,13 @@ RIGHT = 0
 LEFT = 1
 
 # non constants global vars
-for_count = 1000
-impact_parameter = 0
+for_count = configurations_hics.config_for_count
+impact_parameter = configurations_hics.config_impact_parameter
+impact_parameter_limit = configurations_hics.config_impact_parameter_limit
+impact_parameter_interval = configurations_hics.config_impact_parameter_interval
+
+# list of the impact parameters who will be plot on graphs
 impact_parameter_list = []
-impact_parameter_limit = 14
-impact_parameter_interval = 2
 
 # non constants global vars to nuclear density
 F = 0
@@ -43,15 +45,15 @@ eBx_event = []
 eBy_event = []
 eBy_event_nomodule = []
 
-# ion
+# create the ion
 ion = Ion()
 
 def main():
     print('Running...')
-    global impact_parameter, impact_parameter_list, eEx_event, eEy_event, eBx_event, eBy_event, eBy_event_nomodule, vn
+    global impact_parameter, impact_parameter_list
+    global eEx_event, eEy_event, eBx_event, eBy_event, eBy_event_nomodule, vn, ion
 
-    # define ion's type
-    ion.define_gold_ion()
+    ion = configurations_hics.config_ion_type
 
     vn = math.sqrt(1 - ((2 * 938.272046) / (ion.gev*1000)) ** 2)
 
@@ -77,6 +79,7 @@ def main():
         sd_sum_Ey_module_2 = 0
 
         for index in range(for_count):
+            # print("Impact parameter: " + str(impact_parameter) + " /" + str(impact_parameter_limit) + " in for's index: " + str(index) + " /" + str(for_count))
 
             nucleons_positions_xy_right_ion = initialize_nucleons_list(RIGHT)
             nucleons_positions_xy_left_ion = initialize_nucleons_list(LEFT)
@@ -128,8 +131,6 @@ def main():
     create_magnetic_field_graph(eBx_event, eBy_event, eBy_event_nomodule)
     create_electric_field_graph(eEx_event, eEy_event)
     create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e)
-    plt.show()
-    print('Completed!')
 
 def initialize_nucleons_list(direction):
     global F
@@ -152,7 +153,7 @@ def initialize_nucleons_list(direction):
             raise ValueError(ERROR_INVALID_DIRECTION_MESSAGE)
 
         pos_y = r * math.sin(theta_angle)
-        #print('x: '+str(pos_x)+' y: '+str(pos_y))
+       #print('x: '+str(pos_x)+' y: '+str(pos_y))
         xy_nucleons_list.append([pos_x, pos_y])
 
     return xy_nucleons_list
@@ -210,6 +211,8 @@ def create_ion_graph(left, right):
     ax = plt.subplot(gd[0, :])
     plt.axis('equal')
     plt.title("Heavy Ion Collision Simulator  A+A (" + ion.symbol + ")")
+    plt.xlabel("x(fm)$")
+    plt.ylabel("y(fm)")
 
     # draw ion's nucleons
     for index in range(ion.atom_num):
@@ -224,8 +227,8 @@ def create_ion_graph(left, right):
     gca.add_patch(plt.Circle(((impact_parameter - impact_parameter_interval) / 2, 0), radius=ion.R, facecolor='none', edgecolor='r'))
 
     # Turn off tick labels
-    ax.set_yticklabels([])
-    ax.set_xticklabels([])
+    # ax.set_yticklabels([])
+    # ax.set_xticklabels([])
 
 def create_magnetic_field_graph(magnetic_field_x_event, magnetic_field_y_event, magnetic_field_y_event_nomodule):
     global gd
@@ -304,4 +307,8 @@ def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_
     plt.legend(loc='upper right', borderaxespad=0.1)
 
 if __name__ == "__main__":
+    start_time = time.time()
     main()
+    print("Total execution time (seconds): " + str(time.time() - start_time))
+    # show graphs
+    plt.show()
