@@ -105,11 +105,11 @@ def main():
             sd_sum_Ey_module_2 += math.fabs(eExy_right[1] + eExy_left[1])**2
 
         # calculate the events and add to the respective event list
-        eEx_event.append(eEx_sum/for_count)
-        eEy_event.append(eEy_sum/for_count)
-        eBx_event.append(eBx_sum/for_count)
-        eBy_event.append(eBy_sum/for_count)
-        eBy_event_nomodule.append(eBy_sum_raw/for_count)
+        eEx_event.append((eEx_sum/for_count)*2.13)
+        eEy_event.append((eEy_sum/for_count)*2.13)
+        eBx_event.append((eBx_sum/for_count)*2.13)
+        eBy_event.append((eBy_sum/for_count)*2.13)
+        eBy_event_nomodule.append((eBy_sum_raw/for_count)*2.13)
 
         # calculate the standard deviation
         std = math.sqrt(math.fabs(sd_sum_Bx_module_2/for_count - (eBx_sum/for_count)**2))               # sd.|Bx|
@@ -258,7 +258,7 @@ def create_electric_field_graph(electric_field_x_event, electric_field_y_event):
 
 def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e):
     # 3 x 2 grid
-    grid = gridspec.GridSpec(3, 2, wspace=0.4, hspace=0.4)
+    grid = gridspec.GridSpec(3, 2, wspace=0.4, hspace=1.0)
 
     plt.figure(num='HICS - Standard Deviation')
     # row 0, column 0

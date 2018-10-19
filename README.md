@@ -13,14 +13,25 @@ $ python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sym
 ## Ion's type
 Already implemented:
 
-aceleradores:
-    LHC
-    RHIC
-    SPS
-    param -> 0 a 2*R
-
 | Ion | Atom mass | Atom number | Energy (√sNN) | Collider |
 | --- | --------- | ----------- | ------------- | -------- |
 | Pb  | 206       | 82          | 2.76 TeV      | LHC      |
 | Au  | 197       | 79          | 200  GeV      | RHIC     |
-| 1   | 1         | 0           |               |          |
+
+Implemented for all ions:
+
+* Magnetic Field
+* Electric Field
+* Standard Deviation
+
+Also Monte Carlo implemented:
+
+* Metropolis-hastings Algorithm (used to show the incidences in nuclear density calculate)
+
+
+## Usage
+To usage the developed programa, follow:
+
+* Open and configure the variables in the [configurations file](configurations_hics.py)
+
+After configurations, save the file and run de algorithm at [structured_hics](structured_hics.py).
