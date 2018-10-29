@@ -9,7 +9,7 @@ ion = Ion()
 
 F = 0
 step = 0.5
-cases = 100000
+cases = 1000000
 
 def main():
     global F
@@ -45,7 +45,9 @@ def count_plot(count):
     plt.show()
 
 def __calculate_find_root_integrated(x):
-    next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
+    p0 = (1 / (ion.a * math.log(math.exp(ion.R / ion.a) + 1)))
+    next_x = p0 * (x - ion.a * math.log((1 + math.exp((x - ion.R) / ion.a) / (1 + math.exp(-ion.R / ion.a))))) - F
+    #next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
     return next_x
 
 if __name__ == "__main__":

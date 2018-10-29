@@ -30,9 +30,9 @@ impact_parameter_list = []
 F = 0
 
 # constants vars
-a_em = 1/137
-proton_radius = 0.3    # 0.84 - 0.87
-vn = 0 # unique constant modified by ion energy at collision
+a_em = 1/137            #
+proton_radius = 0.84    # 0.84 - 0.87
+vn = 0                  # unique constant modified by ion energy at collision
 
 # create 2x2 subplots to results of collision
 gd = gridspec.GridSpec(2, 2, wspace=0.4, hspace=0.3)
@@ -105,14 +105,14 @@ def main():
             sd_sum_Ey_module_2 += math.fabs(eExy_right[1] + eExy_left[1])**2
 
         # calculate the events and add to the respective event list
-        eEx_event.append((eEx_sum/for_count)*2.13)
-        eEy_event.append((eEy_sum/for_count)*2.13)
-        eBx_event.append((eBx_sum/for_count)*2.13)
-        eBy_event.append((eBy_sum/for_count)*2.13)
-        eBy_event_nomodule.append((eBy_sum_raw/for_count)*2.13)
+        eEx_event.append((eEx_sum/for_count))
+        eEy_event.append((eEy_sum/for_count))
+        eBx_event.append((eBx_sum/for_count))
+        eBy_event.append((eBy_sum/for_count))
+        eBy_event_nomodule.append((eBy_sum_raw/for_count))
 
         # calculate the standard deviation
-        std = math.sqrt(math.fabs(sd_sum_Bx_module_2/for_count - (eBx_sum/for_count)**2))               # sd.|Bx|
+        std = math.sqrt(math.fabs(sd_sum_Bx_module_2 / for_count - (eBx_sum/for_count)**2))               # sd.|Bx|
         bx_module_e.append(std)
         std = math.sqrt(math.fabs(sd_sum_By_module_2 / for_count - (eBy_sum / for_count) ** 2))         # sd.|By|
         by_module_e.append(std)
@@ -160,7 +160,9 @@ def initialize_nucleons_list(direction):
 
 def __calculate_find_root_integrated(x):
     # Todo: develop and integrate an equation to do a method when w is not 0
-    next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
+    p0 = (1 / (ion.a * math.log(math.exp(ion.R / ion.a) + 1)))
+    next_x = p0 * (x - ion.a * math.log((1 + math.exp((x - ion.R) / ion.a) / (1 + math.exp(-ion.R / ion.a))))) - F
+    #next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
     return next_x
 
 def electric_field(nucleon_list):
@@ -170,7 +172,8 @@ def electric_field(nucleon_list):
         x = nucleon_list[index][0]
         y = nucleon_list[index][1]
 
-        if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
+        #if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
+        if math.sqrt(x ** 2 + y ** 2) >= proton_radius:
 
             rn = math.sqrt(x ** 2 + y ** 2)
             sum_x += x / (rn ** 3)
@@ -187,7 +190,9 @@ def magnetic_field(nucleon_list, direction):
         x = nucleon_list[index][0]
         y = nucleon_list[index][1]
 
-        if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
+        #if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
+        if math.sqrt(x ** 2 + y ** 2) >= proton_radius:
+
             rn = math.sqrt(x ** 2 + y ** 2)
 
             if direction == RIGHT:
@@ -211,8 +216,8 @@ def create_ion_graph(left, right):
     ax = plt.subplot(gd[0, :])
     plt.axis('equal')
     plt.title("Heavy Ion Collision Simulator  A+A (" + ion.symbol + ")")
-    plt.xlabel("x(fm)$")
-    plt.ylabel("y(fm)")
+    plt.xlabel("$x(fm)$")
+    plt.ylabel("$y(fm)$")
 
     # draw ion's nucleons
     for index in range(ion.atom_num):
