@@ -1,7 +1,7 @@
 # HICS
 Heavy Ion Collider Simulator
 
-##Requirements:
+## Requirements:
 
 HICS requires [Python](https://www.python.org/) 3.7.x^ to run.
 
