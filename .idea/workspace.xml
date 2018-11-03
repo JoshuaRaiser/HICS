@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3937089-d922-4b2c-ad37-5a6cfcb7b08e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/configurations_hics.py" beforeDir="false" afterPath="$PROJECT_DIR$/configurations_hics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metropolis_hastings.py" beforeDir="false" afterPath="$PROJECT_DIR$/metropolis_hastings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structured_hics.py" beforeDir="false" afterPath="$PROJECT_DIR$/structured_hics.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,9 +20,9 @@
           <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="9" />
-          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -35,15 +38,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="2" />
-          <entry key="md" value="255" />
-          <entry key="py" value="12950" />
+          <entry key="md" value="612" />
+          <entry key="py" value="13436" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="255" />
+          <entry key="Markdown" value="612" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="12950" />
+          <entry key="Python" value="13436" />
         </counts>
       </usages-collector>
     </session>
@@ -98,20 +101,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/structured_hics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
+            <state relative-caret-position="172">
+              <caret line="190" column="66" lean-forward="true" selection-start-line="190" selection-start-column="66" selection-end-line="190" selection-end-column="66" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configurations_hics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="42" column="87" lean-forward="true" selection-start-line="42" selection-start-column="87" selection-end-line="42" selection-end-column="87" />
+            <state relative-caret-position="544">
+              <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -119,11 +122,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/metropolis_hastings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
-              <caret line="25" column="51" lean-forward="true" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+            <state relative-caret-position="-89">
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1540599287163" expanded="true" signature="701:1201" ph="..." />
               </folding>
             </state>
           </provider>
@@ -133,8 +135,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="357">
-                <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <first_editor relative-caret-position="258">
+                <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
               </first_editor>
               <second_editor />
             </state>
@@ -168,7 +170,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/ion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
+            <state relative-caret-position="1241">
               <caret line="73" column="26" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
             </state>
           </provider>
@@ -204,11 +206,11 @@
         <option value="$PROJECT_DIR$/structured algorithm/structured_hics.py" />
         <option value="$USER_HOME$/Desktop/teste.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/objects/ion.py" />
         <option value="$PROJECT_DIR$/structured_hics.py" />
-        <option value="$PROJECT_DIR$/metropolis_hastings.py" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/configurations_hics.py" />
+        <option value="$PROJECT_DIR$/metropolis_hastings.py" />
       </list>
     </option>
   </component>
@@ -408,8 +410,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.structured_hics (1)" />
         <item itemvalue="Python.metropolis_hastings" />
+        <item itemvalue="Python.structured_hics (1)" />
         <item itemvalue="Python.teste" />
         <item itemvalue="Python.structured_hics" />
         <item itemvalue="Python.calculator" />
@@ -439,21 +441,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17559524" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17544784" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.18669528" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3983871" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.2414163" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.24034335" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49776787" weight="0.31759655" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49479166" visible="true" weight="0.1967742" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49479166" weight="0.19635193" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5052083" side_tool="true" weight="0.32419354" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49627978" weight="0.20600858" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -492,16 +494,6 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python37/site-packages/scipy/optimize/minpack.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/matplotlib/axes/_subplots.py" />
     <entry file="file://$USER_HOME$/Desktop/teste.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="357">
-            <caret line="21" selection-start-line="21" selection-end-line="21" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
@@ -524,33 +516,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/ion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
+        <state relative-caret-position="1241">
           <caret line="73" column="26" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/structured_hics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="156" column="34" lean-forward="true" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metropolis_hastings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="25" column="51" lean-forward="true" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1540599287163" expanded="true" signature="701:1201" ph="..." />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="258">
+            <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/configurations_hics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="42" column="87" lean-forward="true" selection-start-line="42" selection-start-column="87" selection-end-line="42" selection-end-column="87" />
+        <state relative-caret-position="544">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metropolis_hastings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-89">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/structured_hics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="190" column="66" lean-forward="true" selection-start-line="190" selection-start-column="66" selection-end-line="190" selection-end-column="66" />
         </state>
       </provider>
     </entry>

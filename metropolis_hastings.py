@@ -9,13 +9,13 @@ ion = Ion()
 
 F = 0
 step = 0.5
-cases = 1000000
+cases = 10000
 
 def main():
     global F
     count = {}
 
-    ion.define_gold_ion()
+    ion.define_lead_ion()
     for index in range(cases):
         F = random.uniform(0, 1)
         r = fsolve(__calculate_find_root_integrated, 0.0)[0]
@@ -41,6 +41,8 @@ def count_plot(count):
 
     plt.bar(range(len(count)), ordered_by_key.values(), color='black', edgecolor='black', align='center')
     plt.xticks(range(len(count)), ordered_by_key.keys())
+
+    plt.xlim(0, 20)
 
     plt.show()
 

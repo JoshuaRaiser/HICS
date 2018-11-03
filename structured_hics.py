@@ -40,8 +40,11 @@ plt.figure(num='HICS - Heavy Ion Collision Simulator')
 
 # electromagnetic field event results
 eEx_event = []
+eEx_event_nomodule = []
 eEy_event = []
+eEy_event_nomodule = []
 eBx_event = []
+eBx_event_nomodule = []
 eBy_event = []
 eBy_event_nomodule = []
 
@@ -63,20 +66,34 @@ def main():
 
     # standard deviation result error list
     bx_module_e = []
+    bx_nomodule_e = []
     by_module_e = []
     by_nomodule_e = []
     ex_module_e = []
+    ex_nomodule_e = []
     ey_module_e = []
+    ey_nomodule_e = []
 
     while impact_parameter <= impact_parameter_limit:
         eEx_sum, eEy_sum = 0, 0
         eBx_sum, eBy_sum = 0, 0
+
+        eBx_sum_raw = 0
         eBy_sum_raw = 0
+        eEx_sum_raw = 0
+        eEy_sum_raw = 0
+
         sd_sum_Bx_module_2 = 0
+        sd_sum_Bx_nomodule_2 = 0
+
         sd_sum_By_module_2 = 0
         sd_sum_By_nomodule_2 = 0
+
         sd_sum_Ex_module_2 = 0
+        sd_sum_Ex_nomodule_2 = 0
+
         sd_sum_Ey_module_2 = 0
+        sd_sum_Ey_nomodule_2 = 0
 
         for index in range(for_count):
             # print("Impact parameter: " + str(impact_parameter) + " /" + str(impact_parameter_limit) + " in for's index: " + str(index) + " /" + str(for_count))
@@ -88,40 +105,64 @@ def main():
             eExy_right = electric_field(nucleons_positions_xy_right_ion)
             eExy_left = electric_field(nucleons_positions_xy_left_ion)
             eEx_sum += math.fabs(eExy_right[0] + eExy_left[0])
+            eEx_sum_raw += eExy_right[0] + eExy_left[0]
             eEy_sum += math.fabs(eExy_right[1] + eExy_left[1])
+            eEy_sum_raw += eExy_right[1] + eExy_left[1]
 
             # calculate the magnetic field
             eBxy_right = magnetic_field(nucleons_positions_xy_right_ion, RIGHT)
             eBxy_left = magnetic_field(nucleons_positions_xy_left_ion, LEFT)
             eBx_sum += math.fabs(eBxy_right[0] + eBxy_left[0])
+            eBx_sum_raw += eBxy_right[0] + eBxy_left[0]
             eBy_sum += math.fabs(eBxy_right[1] + eBxy_left[1])
             eBy_sum_raw += eBxy_right[1] + eBxy_left[1]
 
             # standard deviation
             sd_sum_Bx_module_2 += math.fabs(eBxy_right[0] + eBxy_left[0])**2
+            sd_sum_Bx_nomodule_2 += (eBxy_right[0] + eBxy_left[0])**2
+
             sd_sum_By_module_2 += math.fabs(eBxy_right[1] + eBxy_left[1])**2
             sd_sum_By_nomodule_2 += (eBxy_right[1] + eBxy_left[1])**2
+
             sd_sum_Ex_module_2 += math.fabs(eExy_right[0] + eExy_left[0])**2
+            sd_sum_Ex_nomodule_2 += (eExy_right[0] + eExy_left[0])**2
+
             sd_sum_Ey_module_2 += math.fabs(eExy_right[1] + eExy_left[1])**2
+            sd_sum_Ey_nomodule_2 += (eExy_right[1] + eExy_left[1])**2
 
         # calculate the events and add to the respective event list
         eEx_event.append((eEx_sum/for_count))
+        eEx_event_nomodule.append((eEx_sum_raw / for_count))
+
         eEy_event.append((eEy_sum/for_count))
+        eEy_event_nomodule.append((eEy_sum_raw / for_count))
+
         eBx_event.append((eBx_sum/for_count))
+        eBx_event_nomodule.append((eBx_sum_raw / for_count))
+
         eBy_event.append((eBy_sum/for_count))
         eBy_event_nomodule.append((eBy_sum_raw/for_count))
 
         # calculate the standard deviation
-        std = math.sqrt(math.fabs(sd_sum_Bx_module_2 / for_count - (eBx_sum/for_count)**2))               # sd.|Bx|
+        std = math.sqrt(math.fabs(sd_sum_Bx_module_2 / for_count - (eBx_sum/for_count)**2))             # sd.|Bx|
         bx_module_e.append(std)
+        std = math.sqrt(math.fabs(sd_sum_Bx_nomodule_2 / for_count - (eBx_sum_raw / for_count) ** 2))   # sd.Bx
+        bx_nomodule_e.append(std)
+
         std = math.sqrt(math.fabs(sd_sum_By_module_2 / for_count - (eBy_sum / for_count) ** 2))         # sd.|By|
         by_module_e.append(std)
         std = math.sqrt(math.fabs(sd_sum_By_nomodule_2 / for_count - (eBy_sum_raw / for_count) ** 2))   # sd.By
         by_nomodule_e.append(std)
+
         std = math.sqrt(math.fabs(sd_sum_Ex_module_2 / for_count - (eEx_sum / for_count) ** 2))         # sd.|Ex|
         ex_module_e.append(std)
+        std = math.sqrt(math.fabs(sd_sum_Ex_nomodule_2 / for_count - (eEx_sum_raw / for_count) ** 2))   # sd.Ex
+        ex_nomodule_e.append(std)
+
         std = math.sqrt(math.fabs(sd_sum_Ey_module_2 / for_count - (eEy_sum / for_count) ** 2))         # sd.|Ey|
         ey_module_e.append(std)
+        std = math.sqrt(math.fabs(sd_sum_Ey_nomodule_2 / for_count - (eEy_sum_raw / for_count) ** 2))   # sd.Ey
+        ey_nomodule_e.append(std)
 
         impact_parameter_list.append(impact_parameter)
         impact_parameter += impact_parameter_interval
@@ -130,7 +171,7 @@ def main():
     create_ion_graph(nucleons_positions_xy_right_ion, nucleons_positions_xy_left_ion)
     create_magnetic_field_graph(eBx_event, eBy_event, eBy_event_nomodule)
     create_electric_field_graph(eEx_event, eEy_event)
-    create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e)
+    create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e, bx_nomodule_e, ex_nomodule_e, ey_nomodule_e)
 
 def initialize_nucleons_list(direction):
     global F
@@ -261,12 +302,12 @@ def create_electric_field_graph(electric_field_x_event, electric_field_y_event):
     plt.plot(impact_parameter_list, electric_field_y_event, 'r.-', label='|E(y)|')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
-def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e):
+def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_module_e, ey_module_e, bx_nomodule_e, ex_nomodule_e, ey_nomodule_e):
     # 3 x 2 grid
-    grid = gridspec.GridSpec(3, 2, wspace=0.4, hspace=1.0)
+    grid = gridspec.GridSpec(4, 2, wspace=0.4, hspace=1.0)
 
     plt.figure(num='HICS - Standard Deviation')
-    # row 0, column 0
+    # row 1, column 0
     plt.subplot(grid[0, 0])
     plt.title("Standard Deviation of |B(x)|")
     plt.xlabel("$b (fm)$")
@@ -275,8 +316,17 @@ def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_
     plt.errorbar(impact_parameter_list, eBx_event, bx_module_e, ecolor='g', linestyle='None', label='Error')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
-    # row 1, column 0
+    # row 2, column 0
     plt.subplot(grid[1, 0])
+    plt.title("Standard Deviation of B(x)")
+    plt.xlabel("$b (fm)$")
+    plt.ylabel("e.B Field event")
+    plt.plot(impact_parameter_list, eBx_event_nomodule, 'c.-', label='e.B Field B(x)')
+    plt.errorbar(impact_parameter_list, eBx_event_nomodule, bx_nomodule_e, ecolor='g', linestyle='None', label='Error')
+    plt.legend(loc='upper right', borderaxespad=0.1)
+
+    # row 3, column 0
+    plt.subplot(grid[2, 0])
     plt.title("Standard Deviation of |B(y)|")
     plt.xlabel("$b (fm)$")
     plt.ylabel("e.B Field event")
@@ -284,8 +334,8 @@ def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_
     plt.errorbar(impact_parameter_list, eBy_event, by_module_e, ecolor='g', linestyle='None', label='Error')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
-    # row 2, column 0
-    plt.subplot(grid[2, 0])
+    # row 4, column 0
+    plt.subplot(grid[3, 0])
     plt.title("Standard Deviation of B(y)")
     plt.xlabel("$b (fm)$")
     plt.ylabel("e.B Field event")
@@ -293,7 +343,7 @@ def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_
     plt.errorbar(impact_parameter_list, eBy_event_nomodule, by_nomodule_e, ecolor='g', linestyle='None', label='Error')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
-    # row 0, column 1
+    # row 1, column 2
     plt.subplot(grid[0, 1])
     plt.title("Standard Deviation of |E(x)|")
     plt.xlabel("$b (fm)$")
@@ -302,13 +352,31 @@ def create_standard_deviation_graph(bx_module_e, by_module_e, by_nomodule_e, ex_
     plt.errorbar(impact_parameter_list, eEx_event, ex_module_e, ecolor='g', linestyle='None', label='Error')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
-    # row 1, column 1
+    # row 2, column 2
     plt.subplot(grid[1, 1])
+    plt.title("Standard Deviation of E(x)")
+    plt.xlabel("$b (fm)$")
+    plt.ylabel("e.E Field event")
+    plt.plot(impact_parameter_list, eEx_event_nomodule, 'k.-', label='e.E Field E(x)')
+    plt.errorbar(impact_parameter_list, eEx_event_nomodule, ex_nomodule_e, ecolor='g', linestyle='None', label='Error')
+    plt.legend(loc='upper right', borderaxespad=0.1)
+
+    # row 3, column 2
+    plt.subplot(grid[2, 1])
     plt.title("Standard Deviation of |E(y)|")
     plt.xlabel("$b (fm)$")
     plt.ylabel("e.E Field event")
     plt.plot(impact_parameter_list, eEy_event, 'k.-', label='e.E Field |E(y)|')
     plt.errorbar(impact_parameter_list, eEy_event, ey_module_e, ecolor='g', linestyle='None', label='Error')
+    plt.legend(loc='upper right', borderaxespad=0.1)
+
+    # row 4, column 2
+    plt.subplot(grid[3, 1])
+    plt.title("Standard Deviation of E(y)")
+    plt.xlabel("$b (fm)$")
+    plt.ylabel("e.E Field event")
+    plt.plot(impact_parameter_list, eEy_event_nomodule, 'k.-', label='e.E Field E(y)')
+    plt.errorbar(impact_parameter_list, eEy_event_nomodule, ey_nomodule_e, ecolor='g', linestyle='None', label='Error')
     plt.legend(loc='upper right', borderaxespad=0.1)
 
 if __name__ == "__main__":
