@@ -49,7 +49,6 @@ def count_plot(count):
 def __calculate_find_root_integrated(x):
     p0 = (1 / (ion.a * math.log(math.exp(ion.R / ion.a) + 1)))
     next_x = p0 * (x - ion.a * math.log((1 + math.exp((x - ion.R) / ion.a) / (1 + math.exp(-ion.R / ion.a))))) - F
-    #next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
     return next_x
 
 if __name__ == "__main__":

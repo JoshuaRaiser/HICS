@@ -12,6 +12,7 @@
 ' This file contains all the configurable variables to the HICS - Heavy Ion Collider Simulator
 '
 ' HICS is an Academic Work for obtains the Bachelor title in Computer Science
+' Made by: Joshua Benjamin Raiser Tallmann, Computer Science's student - december of 2018
 '''
 
 from objects.ion import Ion
@@ -33,12 +34,12 @@ from objects.ion import Ion
 '                           * lead (Pb, 206, 82)
 '''
                                             # Autor's considerations:
-config_for_count = 1000                     # 1000 is a good choice
+config_for_count = 100                     # 1000 is a good choice
 config_impact_parameter = 0                 # start in 0 to get a full centralized collision at start of simulation
 config_impact_parameter_limit = 14          # 14 is a good choice
 config_impact_parameter_interval = 2        # 2 for the interval jump is good, can be 0 if the limit are 0 too!
 
 config_ion_type = Ion()
-config_ion_type.define_gold_ion()           # gold is nice to initial collisions simulations, later can try with others
+config_ion_type.define_lead_ion()           # gold is nice to initial collisions simulations, later can try with others
                                             # define_gold_ion() to define gold ion type (Au)
                                             # define_lead_ion() to define lead ion type (Pb)

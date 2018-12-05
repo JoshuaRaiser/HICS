@@ -1,3 +1,16 @@
+'''
+'     __ __                     ____            _____     _____    __          _____            __     __
+'    / // /__ ___ __  ____ __  /  _/__  ___    / ___/__  / / (_)__/ /__ ____  / __(_)_ _  __ __/ /__ _/ /____  ____
+'   / _  / -_) _ `/ |/ / // / _/ // _ \/ _ \  / /__/ _ \/ / / / _  / -_) __/ _\ \/ /  ' \/ // / / _ `/ __/ _ \/ __/
+'  /_//_/\__/\_,_/|___/\_, / /___/\___/_//_/  \___/\___/_/_/_/\_,_/\__/_/   /___/_/_/_/_/\_,_/_/\_,_/\__/\___/_/
+'                     /___/
+'
+' This file contains all the implementation  to the HICS - Heavy Ion Collider Simulator
+'
+' HICS is an Academic Work for obtains the Bachelor title in Computer Science
+' Made by: Joshua Benjamin Raiser Tallmann, Computer Science's student - december of 2018
+'''
+
 # imports
 import math
 import random
@@ -30,7 +43,7 @@ impact_parameter_list = []
 F = 0
 
 # constants vars
-a_em = 1/137            #
+a_em = 1/137            # constant of fine structure
 proton_radius = 0.84    # 0.84 - 0.87
 vn = 0                  # unique constant modified by ion energy at collision
 
@@ -96,8 +109,6 @@ def main():
         sd_sum_Ey_nomodule_2 = 0
 
         for index in range(for_count):
-            # print("Impact parameter: " + str(impact_parameter) + " /" + str(impact_parameter_limit) + " in for's index: " + str(index) + " /" + str(for_count))
-
             nucleons_positions_xy_right_ion = initialize_nucleons_list(RIGHT)
             nucleons_positions_xy_left_ion = initialize_nucleons_list(LEFT)
 
@@ -194,16 +205,13 @@ def initialize_nucleons_list(direction):
             raise ValueError(ERROR_INVALID_DIRECTION_MESSAGE)
 
         pos_y = r * math.sin(theta_angle)
-       #print('x: '+str(pos_x)+' y: '+str(pos_y))
         xy_nucleons_list.append([pos_x, pos_y])
 
     return xy_nucleons_list
 
 def __calculate_find_root_integrated(x):
-    # Todo: develop and integrate an equation to do a method when w is not 0
     p0 = (1 / (ion.a * math.log(math.exp(ion.R / ion.a) + 1)))
     next_x = p0 * (x - ion.a * math.log((1 + math.exp((x - ion.R) / ion.a) / (1 + math.exp(-ion.R / ion.a))))) - F
-    #next_x = 1.0/ion.R * (x - ion.a * math.log(math.exp(ion.R/ion.a) + math.exp(x/ion.a)) + ion.R) - F
     return next_x
 
 def electric_field(nucleon_list):
@@ -213,7 +221,6 @@ def electric_field(nucleon_list):
         x = nucleon_list[index][0]
         y = nucleon_list[index][1]
 
-        #if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
         if math.sqrt(x ** 2 + y ** 2) >= proton_radius:
 
             rn = math.sqrt(x ** 2 + y ** 2)
@@ -231,7 +238,6 @@ def magnetic_field(nucleon_list, direction):
         x = nucleon_list[index][0]
         y = nucleon_list[index][1]
 
-        #if math.fabs(x) >= proton_radius and math.fabs(y) >= proton_radius:
         if math.sqrt(x ** 2 + y ** 2) >= proton_radius:
 
             rn = math.sqrt(x ** 2 + y ** 2)
@@ -271,10 +277,6 @@ def create_ion_graph(left, right):
     gca = plt.gca()
     gca.add_patch(plt.Circle((-(impact_parameter - impact_parameter_interval) / 2, 0), radius=ion.R, facecolor='none', edgecolor='b'))
     gca.add_patch(plt.Circle(((impact_parameter - impact_parameter_interval) / 2, 0), radius=ion.R, facecolor='none', edgecolor='r'))
-
-    # Turn off tick labels
-    # ax.set_yticklabels([])
-    # ax.set_xticklabels([])
 
 def create_magnetic_field_graph(magnetic_field_x_event, magnetic_field_y_event, magnetic_field_y_event_nomodule):
     global gd
